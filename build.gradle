@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+}
+
+group = 'ru.grobikon'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'commons-io:commons-io:2.6'
+
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.5'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+
+//    implementation 'org.docx4j:docx4j-JAXB-Internal:8.0.0'
+//    implementation 'org.docx4j:docx4j-JAXB-ReferenceImpl:8.0.0'
+//    implementation 'org.docx4j:docx4j-JAXB-MOXy:8.0.0'
+//    implementation 'org.docx4j:docx4j-export-fo:8.0.0'
+
+    implementation ('org.docx4j:docx4j:3.0.1') {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
